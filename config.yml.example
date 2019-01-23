@@ -1,0 +1,9 @@
+node_bts: 
+  - wss://api-ru.bts.blckchnd.com
+  - wss://api.bts.blckchnd.com
+  - wss://bitshares.openledger.info/ws
+
+# My Bitshares accounts
+my_accounts:
+ - foo1
+ - foo2
