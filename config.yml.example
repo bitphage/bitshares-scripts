@@ -7,3 +7,18 @@ node_bts:
 my_accounts:
  - foo1
  - foo2
+
+# For balances_as_btc.py, specify final BTC asset
+btc_asset: RUDEX.BTC
+
+# Instead of direct value convertation ASSET -> xxx.BTC, use intermediate assets
+# Note that order is critical
+transform_assets:
+  RUDEX.GOLOS: RUBLE
+  RUDEX.GBG: RUBLE
+  BTS: RUBLE
+  TWENTIX: USD
+  XCHNG.FUND: USD
+  OPULENCE: USD
+  ESCROW.RUBLE: RUBLE
+  USD: RUBLE
