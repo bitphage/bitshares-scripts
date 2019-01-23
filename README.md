@@ -18,3 +18,4 @@ pipenv shell
 exit
 ```
 
+**Note:** some scripts are sending transactions, you need to add private active keys for your accounts via `uptick addkey`
