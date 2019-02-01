@@ -6,7 +6,7 @@ This is a small scripts collection for doing various stuff in Bitshares
 Installation using pipenv
 -------------------------
 
-1. Make sure you have libssl-dev installed.
+1. Make sure you have installed required packages: `apt-get install gcc make libssl-dev`
 2. Install [pipenv](https://docs.pipenv.org/).
 3. Run `pipenv install` to install the dependencies
 4. Copy `common.yml.example` to `common.yml` and change variables according to your needs
