@@ -9,6 +9,7 @@ name = "pypi"
 pyaml = "*"
 bitshares = "*"
 uptick = "*"
+click = "*"
 
 [requires]
 python_version = "3.6"
