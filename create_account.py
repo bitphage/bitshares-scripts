@@ -93,7 +93,7 @@ def main(debug, config, wallet_password, password, broadcast, parent_account, ac
 
     try:
         bitshares.create_account(account_name, registrar=parent_account, referrer=account['id'],
-                                 referrer_percent=0, password=password)
+                                 referrer_percent=0, password=password, storekeys=b)
     except MissingKeyError:
         log.critical('No key for {} in storage, use `uptick addkey` to add'.format(parent_account))
         sys.exit(1)
