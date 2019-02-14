@@ -19,9 +19,9 @@ def main():
             description='Show account balances (avail + orders balance)',
             epilog='Report bugs to: ')
     parser.add_argument('-d', '--debug', action='store_true',
-            help='enable debug output'),
+                        help='enable debug output'),
     parser.add_argument('-c', '--config', default='./config.yml',
-            help='specify custom path for config file')
+                        help='specify custom path for config file')
     parser.add_argument('account')
     args = parser.parse_args()
 
