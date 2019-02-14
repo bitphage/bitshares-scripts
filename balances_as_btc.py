@@ -81,31 +81,19 @@ def main():
         # Avail balances
         for i in account.balances:
             asset = i['symbol']
-            if asset in sum_balances:
-                sum_balances[asset] += i['amount']
-            else:
-                sum_balances[i['symbol']] = i['amount']
+            sum_balances[asset] = sum_balances.setdefault(asset, 0) + i['amount']
 
         # Balance in orders
         for order in account.openorders:
             asset = order['for_sale']['symbol']
-            if asset in sum_balances:
-                sum_balances[asset] += order['for_sale']['amount']
-            else:
-                sum_balances[asset] = order['for_sale']['amount']
+            sum_balances[asset] = sum_balances.setdefault(asset, 0) + order['for_sale']['amount']
 
         # Margin positions
         for asset, details in account.callpositions.items():
-            if asset in sum_balances:
-                sum_balances[asset] -= details['debt']['amount']
-            else:
-                sum_balances[asset] = 0 - details['debt']['amount']
+            sum_balances[asset] = sum_balances.setdefault(asset, 0) - details['debt']['amount']
 
             asset = details['collateral']['asset']['symbol']
-            if asset in sum_balances:
-                sum_balances[asset] += details['collateral']['amount']
-            else:
-                sum_balances[asset] = 0 - details['collateral']['amount']
+            sum_balances[asset] = sum_balances.setdefault(asset, 0) + details['collateral']['amount']
 
     for from_asset, to_asset in conf['transform_assets'].items():
         log.debug('Transforming {} to {}'.format(from_asset, to_asset))

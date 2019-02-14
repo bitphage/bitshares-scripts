@@ -50,10 +50,7 @@ def main():
 
     for order in account.openorders:
         asset = order['for_sale']['symbol']
-        if asset in sum_balances:
-            sum_balances[asset] += order['for_sale']['amount']
-        else:
-            sum_balances[asset] = order['for_sale']['amount']
+        sum_balances[asset] = sum_balances.setdefault(asset, 0) + order['for_sale']['amount']
 
     for key in sum_balances:
         print('{}: {:.8f}'.format(key, sum_balances[key]))
