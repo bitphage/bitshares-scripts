@@ -3,6 +3,17 @@ bitshares-scripts
 
 This is a small scripts collection for doing various stuff in Bitshares
 
+* `balances_as_btc.py` - Summarize all assets on all accounts and show BTC value
+* `cancel_all_orders.py` - Cancel all orders on the specified account
+* `create_account.py` - Create new account with random password and providing all keys to stdout
+* `get_account.py` - Display account object
+* `get_balance.py` - Display account balances
+* `get_feeds.py` - Show price feeds for specified asset
+* `get_keys.py` - Generate private and public keys from account name and password
+* `get_op_id.py` - Display operation id numbers and corresponding name
+* `get_witness.py` - Display witness object
+* `update_keys.py` - Change account keys using generated random password and providing all keys to stdout
+
 Installation using pipenv
 -------------------------
 
