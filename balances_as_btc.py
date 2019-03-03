@@ -15,8 +15,8 @@ from bitshares.market import Market
 
 log = logging.getLogger(__name__)
 
-def main():
 
+def main():
     def convert_asset(from_value, from_asset, to_asset):
         """ Converts asset to another based on the latest market value
 
@@ -49,12 +49,10 @@ def main():
         return sum_balances
 
     parser = argparse.ArgumentParser(
-            description='Summarize all assets on all accounts and show BTC equivalent',
-            epilog='Report bugs to: ')
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='enable debug output'),
-    parser.add_argument('-c', '--config', default='./config.yml',
-                        help='specify custom path for config file')
+        description='Summarize all assets on all accounts and show BTC equivalent', epilog='Report bugs to: '
+    )
+    parser.add_argument('-d', '--debug', action='store_true', help='enable debug output'),
+    parser.add_argument('-c', '--config', default='./config.yml', help='specify custom path for config file')
     args = parser.parse_args()
 
     # create logger
@@ -105,6 +103,7 @@ def main():
             sum_balances = transform_asset(sum_balances, asset, conf['btc_asset'])
 
     print('Accounts value in {}: {:.8f}'.format(conf['btc_asset'], sum_balances[conf['btc_asset']]))
+
 
 if __name__ == '__main__':
     main()

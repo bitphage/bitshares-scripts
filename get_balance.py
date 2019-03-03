@@ -14,14 +14,13 @@ from bitshares.amount import Amount
 
 log = logging.getLogger(__name__)
 
+
 def main():
     parser = argparse.ArgumentParser(
-            description='Show account balances (avail + orders balance)',
-            epilog='Report bugs to: ')
-    parser.add_argument('-d', '--debug', action='store_true',
-                        help='enable debug output'),
-    parser.add_argument('-c', '--config', default='./config.yml',
-                        help='specify custom path for config file')
+        description='Show account balances (avail + orders balance)', epilog='Report bugs to: '
+    )
+    parser.add_argument('-d', '--debug', action='store_true', help='enable debug output'),
+    parser.add_argument('-c', '--config', default='./config.yml', help='specify custom path for config file')
     parser.add_argument('account')
     args = parser.parse_args()
 
@@ -54,6 +53,7 @@ def main():
 
     for key in sum_balances:
         print('{}: {:.8f}'.format(key, sum_balances[key]))
+
 
 if __name__ == '__main__':
     main()

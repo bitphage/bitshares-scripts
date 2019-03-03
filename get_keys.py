@@ -14,17 +14,12 @@ log = logging.getLogger(__name__)
 
 roles = ['active', 'owner', 'memo']
 
+
 def main():
 
-    parser = argparse.ArgumentParser(
-            description='Generate private keys from password',
-            epilog='Report bugs to: ')
-    parser.add_argument(
-            '-d', '--debug', action='store_true',
-            help='enable debug output'),
-    parser.add_argument(
-            '-c', '--config', default='./config.yml',
-            help='specify custom path for config file')
+    parser = argparse.ArgumentParser(description='Generate private keys from password', epilog='Report bugs to: ')
+    parser.add_argument('-d', '--debug', action='store_true', help='enable debug output'),
+    parser.add_argument('-c', '--config', default='./config.yml', help='specify custom path for config file')
     parser.add_argument('account')
     parser.add_argument('password')
     args = parser.parse_args()

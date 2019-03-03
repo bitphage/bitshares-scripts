@@ -19,23 +19,26 @@ from bitshares.exceptions import MissingKeyError
 
 log = logging.getLogger(__name__)
 
-key_types = [
-    'active',
-    'owner',
-    'memo'
-]
+key_types = ['active', 'owner', 'memo']
+
 
 def generate_password(size=53, chars=string.ascii_letters + string.digits):
     """ Generate random word with letters and digits
     """
     return ''.join(random.choice(chars) for x in range(size))
 
+
 @click.command()
 @click.option('-d', '--debug', default=False, is_flag=True, help='enable debug output')
-@click.option('-c', '--config', type=click.File('r'), default='./config.yml',
-              help='specify custom path for config file')
-@click.option('--wallet-password', prompt=True, hide_input=True,
-              help='master password for bitshares wallet (a prompt will be used if not provided)')
+@click.option(
+    '-c', '--config', type=click.File('r'), default='./config.yml', help='specify custom path for config file'
+)
+@click.option(
+    '--wallet-password',
+    prompt=True,
+    hide_input=True,
+    help='master password for bitshares wallet (a prompt will be used if not provided)',
+)
 @click.option('-p', '--password', help='manually specify a password (if not, a random will be generated)')
 @click.option('--broadcast', default=False, is_flag=True, help='broadcast transaction')
 @click.argument('account_name')
@@ -81,7 +84,7 @@ def main(debug, config, wallet_password, password, broadcast, account_name):
         k = PasswordKey(account_name, password, role=key_type)
 
         privkey = k.get_private_key()
-        print('{} private: {}'.format(key_type, str(privkey))) # we need explicit str() conversion!
+        print('{} private: {}'.format(key_type, str(privkey)))  # we need explicit str() conversion!
 
         # pubkey with default prefix GPH
         pubkey = k.get_public_key()
@@ -99,20 +102,20 @@ def main(debug, config, wallet_password, password, broadcast, account_name):
     posting_accounts_authority = []
 
     s = {
-            'account': account['id'],
-            'new_options': account['options'],
-            'owner': {'account_auths': owner_accounts_authority,
-                'key_auths': owner_key_authority,
-                'weight_threshold': 1},
-            'active': {'account_auths': active_accounts_authority,
-                'key_auths': active_key_authority,
-                'weight_threshold': 1},
-            'fee': {'amount': 0, 'asset_id': '1.3.0'},
-            'extensions': {},
-            'prefix': bitshares.prefix
-         }
+        'account': account['id'],
+        'new_options': account['options'],
+        'owner': {'account_auths': owner_accounts_authority, 'key_auths': owner_key_authority, 'weight_threshold': 1},
+        'active': {
+            'account_auths': active_accounts_authority,
+            'key_auths': active_key_authority,
+            'weight_threshold': 1,
+        },
+        'fee': {'amount': 0, 'asset_id': '1.3.0'},
+        'extensions': {},
+        'prefix': bitshares.prefix,
+    }
 
-    #pprint(s)
+    # pprint(s)
     op = operations.Account_update(**s)
 
     try:
@@ -120,6 +123,7 @@ def main(debug, config, wallet_password, password, broadcast, account_name):
     except MissingKeyError:
         log.critical('No key for {} in storage, use `uptick addkey` to add'.format(account_name))
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

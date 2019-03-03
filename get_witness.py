@@ -14,15 +14,12 @@ from bitshares.witness import Witness
 
 log = logging.getLogger(__name__)
 
+
 def main():
 
-    parser = argparse.ArgumentParser(
-            description='',
-            epilog='Report bugs to: ')
-    parser.add_argument('-d', '--debug', action='store_true',
-            help='enable debug output'),
-    parser.add_argument('-c', '--config', default='./config.yml',
-            help='specify custom path for config file')
+    parser = argparse.ArgumentParser(description='', epilog='Report bugs to: ')
+    parser.add_argument('-d', '--debug', action='store_true', help='enable debug output'),
+    parser.add_argument('-c', '--config', default='./config.yml', help='specify custom path for config file')
     parser.add_argument('account')
     args = parser.parse_args()
 
@@ -43,6 +40,7 @@ def main():
     bitshares = BitShares(node=conf['node_bts'], no_broadcast=True)
     w = Witness(args.account, bitshares_instance=bitshares)
     pprint(dict(w))
+
 
 if __name__ == '__main__':
     main()
