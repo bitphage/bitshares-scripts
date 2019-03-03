@@ -7,6 +7,7 @@ This is a small scripts collection for doing various stuff in Bitshares
 * `cancel_all_orders.py` - Cancel all orders on the specified account
 * `create_account.py` - Create new account with random password and providing all keys to stdout
 * `get_account.py` - Display account object
+* `get_asset.py` - Display asset object
 * `get_balance.py` - Display account balances
 * `get_feeds.py` - Show price feeds for specified asset
 * `get_keys.py` - Generate private and public keys from account name and password
