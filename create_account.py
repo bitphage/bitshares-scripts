@@ -101,7 +101,7 @@ def main(debug, config, wallet_password, password, broadcast, parent_account, ac
             referrer=account['id'],
             referrer_percent=0,
             password=password,
-            storekeys=b,
+            storekeys=broadcast,
         )
     except MissingKeyError:
         log.critical('No key for {} in storage, use `uptick addkey` to add'.format(parent_account))
