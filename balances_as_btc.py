@@ -93,6 +93,9 @@ def main():
             asset = details['collateral']['asset']['symbol']
             sum_balances[asset] = sum_balances.setdefault(asset, 0) + details['collateral']['amount']
 
+    for asset, amount in sum_balances.items():
+        log.debug('Total: {} {}'.format(asset, amount))
+
     for from_asset, to_asset in conf['transform_assets'].items():
         log.debug('Transforming {} to {}'.format(from_asset, to_asset))
         sum_balances = transform_asset(sum_balances, from_asset, to_asset)
