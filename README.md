@@ -9,6 +9,7 @@ This is a small scripts collection for doing various stuff in Bitshares
 * `get_account.py` - Display account object
 * `get_asset.py` - Display asset object
 * `get_balance.py` - Display account balances
+* `get_balance_multi.py` - Display summarized balance of multiple accounts
 * `get_feeds.py` - Show price feeds for specified asset
 * `get_keys.py` - Generate private and public keys from account name and password
 * `get_op_id.py` - Display operation id numbers and corresponding name
