@@ -45,7 +45,7 @@ def main(debug, config, wallet_password, buy_only, sell_only, market, account):
     log.addHandler(handler)
 
     # parse config
-    conf = yaml.load(config)
+    conf = yaml.safe_load(config)
 
     bitshares = BitShares(node=conf['node_bts'])
 

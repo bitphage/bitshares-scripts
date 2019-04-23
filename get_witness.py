@@ -35,7 +35,7 @@ def main():
 
     # parse config
     with open(args.config, 'r') as ymlfile:
-        conf = yaml.load(ymlfile)
+        conf = yaml.safe_load(ymlfile)
 
     bitshares = BitShares(node=conf['node_bts'], no_broadcast=True)
     w = Witness(args.account, bitshares_instance=bitshares)

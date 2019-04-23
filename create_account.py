@@ -58,7 +58,7 @@ def main(debug, config, wallet_password, password, broadcast, parent_account, ac
     log.addHandler(handler)
 
     # parse config
-    conf = yaml.load(config)
+    conf = yaml.safe_load(config)
 
     b = not broadcast
     bitshares = BitShares(node=conf['node_bts'], nobroadcast=b)
