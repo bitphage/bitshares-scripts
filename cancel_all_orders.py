@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
-import sys
 import json
 import logging
-import yaml
-import click
+import sys
 
+import click
+import yaml
 from bitshares import BitShares
 from bitshares.account import Account
 from bitshares.market import Market

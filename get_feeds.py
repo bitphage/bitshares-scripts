@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 
-import sys
-import json
 import argparse
+import json
 import logging
-import yaml
-
+import sys
 from pprint import pprint
 
+import yaml
 from bitshares import BitShares
-from bitshares.asset import Asset
 from bitshares.account import Account
+from bitshares.asset import Asset
 
 log = logging.getLogger(__name__)
 

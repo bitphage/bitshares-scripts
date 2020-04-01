@@ -1,4 +1,4 @@
-node_bts: 
+node_bts:
   - wss://api-ru.bts.blckchnd.com
   - wss://api.bts.blckchnd.com
   - wss://bitshares.openledger.info/ws

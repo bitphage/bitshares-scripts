@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-import sys
-import json
 import argparse
+import json
 import logging
-import yaml
-
+import sys
 from pprint import pprint
 
+import yaml
 from bitshares import BitShares
 from bitshares.account import Account
 
@@ -15,9 +14,7 @@ log = logging.getLogger(__name__)
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='Show multiple accounts ids', epilog='Report bugs to: '
-    )
+    parser = argparse.ArgumentParser(description='Show multiple accounts ids', epilog='Report bugs to: ')
     parser.add_argument('-d', '--debug', action='store_true', help='enable debug output'),
     parser.add_argument('-c', '--config', default='./config.yml', help='specify custom path for config file')
     args = parser.parse_args()
@@ -48,6 +45,7 @@ def main():
         ids += '"{}" '.format((account['id']))
 
     print(ids)
+
 
 if __name__ == '__main__':
     main()

@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from pprint import pprint
+
 from bitsharesbase import operationids
 
 

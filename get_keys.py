@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 
-import sys
-import json
 import argparse
+import json
 import logging
-import yaml
-
+import sys
 from pprint import pprint
 
+import yaml
 from bitsharesbase.account import PasswordKey, PublicKey
 
 log = logging.getLogger(__name__)

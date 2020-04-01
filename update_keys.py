@@ -1,21 +1,20 @@
 #!/usr/bin/env python
 
-import sys
 import json
 import logging
-import yaml
-import string
 import random
-import click
-
+import string
+import sys
 from pprint import pprint
 
+import click
+import yaml
 from bitshares import BitShares
 from bitshares.account import Account
+from bitshares.exceptions import MissingKeyError
 from bitsharesbase import operations
 from bitsharesbase.account import PasswordKey, PublicKey
 from graphenestorage.exceptions import WrongMasterPasswordException
-from bitshares.exceptions import MissingKeyError
 
 log = logging.getLogger(__name__)
 
