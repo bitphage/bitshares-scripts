@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 
-import json
 import logging
 import random
 import string
 import sys
-from pprint import pprint
 
 import click
 import yaml
@@ -13,7 +11,7 @@ from bitshares import BitShares
 from bitshares.account import Account
 from bitshares.exceptions import MissingKeyError
 from bitsharesbase import operations
-from bitsharesbase.account import PasswordKey, PublicKey
+from bitsharesbase.account import PasswordKey
 from graphenestorage.exceptions import WrongMasterPasswordException
 
 log = logging.getLogger(__name__)
@@ -46,7 +44,7 @@ def main(debug, config, wallet_password, password, broadcast, account_name):
         generated. By default, transaction will not be broadcasted (dry-run mode).
     """
     # create logger
-    if debug == True:
+    if debug is True:
         log.setLevel(logging.DEBUG)
     else:
         log.setLevel(logging.INFO)
@@ -98,7 +96,6 @@ def main(debug, config, wallet_password, password, broadcast, account_name):
     active_key_authority = [[key['active'], 1]]
     owner_accounts_authority = []
     active_accounts_authority = []
-    posting_accounts_authority = []
 
     s = {
         'account': account['id'],
