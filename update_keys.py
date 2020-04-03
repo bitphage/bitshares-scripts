@@ -2,6 +2,7 @@
 
 import sys
 from pprint import pformat
+from typing import List, Tuple
 
 import click
 from bitshares.account import Account
@@ -22,8 +23,9 @@ from bitsharesscripts.functions import generate_password, get_keys_from_password
 @click.argument('account_name')
 @click.pass_context
 def main(ctx, password, broadcast, account_name):
-    """ Use this script to change account keys. By default, a random will be
-        generated. By default, transaction will not be broadcasted (dry-run mode).
+    """Use this script to change account keys.
+
+    By default, a random will be generated. By default, transaction will not be broadcasted (dry-run mode).
     """
     account = Account(account_name, bitshares_instance=ctx.bitshares)
 
@@ -37,12 +39,12 @@ def main(ctx, password, broadcast, account_name):
 
     # prepare for json format
     account['options']['memo_key'] = key['memo']
-    owner_key_authority = [[key['owner'], 1]]
-    active_key_authority = [[key['active'], 1]]
-    owner_accounts_authority = []
-    active_accounts_authority = []
+    owner_key_authority = [(key['owner'], 1)]
+    active_key_authority = [(key['active'], 1)]
+    owner_accounts_authority: List[Tuple[str, int]] = []
+    active_accounts_authority: List[Tuple[str, int]] = []
 
-    s = {
+    pre_op = {
         'account': account['id'],
         'new_options': account['options'],
         'owner': {'account_auths': owner_accounts_authority, 'key_auths': owner_key_authority, 'weight_threshold': 1},
@@ -56,8 +58,8 @@ def main(ctx, password, broadcast, account_name):
         'prefix': ctx.bitshares.prefix,
     }
 
-    ctx.log.debug(pformat(s))
-    op = operations.Account_update(**s)
+    op = operations.Account_update(**pre_op)
+    ctx.log.debug(pformat(op.json()))
 
     if not broadcast:
         ctx.log.info('Not broadcasting!')
