@@ -5,7 +5,7 @@ from typing import Any, Dict, List, Optional
 from bitsharesbase.account import PasswordKey
 
 
-def generate_password(size=53, chars=string.ascii_letters + string.digits):
+def generate_password(size: int = 53, chars: str = string.ascii_letters + string.digits) -> str:
     """ Generate random word with letters and digits
     """
     return ''.join(secrets.choice(chars) for x in range(size))
