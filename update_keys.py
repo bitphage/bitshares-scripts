@@ -7,13 +7,10 @@ import click
 from bitshares.account import Account
 from bitshares.exceptions import MissingKeyError
 from bitsharesbase import operations
-from bitsharesbase.account import PasswordKey
 from uptick.decorators import unlock
 
 from bitsharesscripts.decorators import chain, common_options
-from bitsharesscripts.functions import generate_password
-
-key_types = ['active', 'owner', 'memo']
+from bitsharesscripts.functions import generate_password, get_keys_from_password
 
 
 @click.command()
@@ -36,20 +33,7 @@ def main(ctx, password, broadcast, account_name):
 
     print('password: {}\n'.format(password))
 
-    key = dict()
-    for key_type in key_types:
-        # PasswordKey object
-        k = PasswordKey(account_name, password, role=key_type)
-
-        privkey = k.get_private_key()
-        print('{} private: {}'.format(key_type, str(privkey)))  # we need explicit str() conversion!
-
-        # pubkey with default prefix GPH
-        pubkey = k.get_public_key()
-
-        # pubkey with correct prefix
-        key[key_type] = format(pubkey, ctx.bitshares.prefix)
-        print('{} public: {}\n'.format(key_type, key[key_type]))
+    key = get_keys_from_password(account_name, password, ctx.bitshares)
 
     # prepare for json format
     account['options']['memo_key'] = key['memo']
