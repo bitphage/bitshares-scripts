@@ -2,7 +2,6 @@
 
 import json
 import logging
-import random
 import string
 import sys
 from pprint import pprint
@@ -16,15 +15,11 @@ from bitsharesbase import operations
 from bitsharesbase.account import PasswordKey, PublicKey
 from graphenestorage.exceptions import WrongMasterPasswordException
 
+from bitsharesscripts.functions import generate_password
+
 log = logging.getLogger(__name__)
 
 key_types = ['active', 'owner', 'memo']
-
-
-def generate_password(size=53, chars=string.ascii_letters + string.digits):
-    """ Generate random word with letters and digits
-    """
-    return ''.join(random.choice(chars) for x in range(size))
 
 
 @click.command()

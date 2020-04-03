@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 
 import logging
-import random
-import string
 import sys
 
 import click
@@ -14,15 +12,11 @@ from bitsharesbase import operations
 from bitsharesbase.account import PasswordKey
 from graphenestorage.exceptions import WrongMasterPasswordException
 
+from bitsharesscripts.functions import generate_password
+
 log = logging.getLogger(__name__)
 
 key_types = ['active', 'owner', 'memo']
-
-
-def generate_password(size=53, chars=string.ascii_letters + string.digits):
-    """ Generate random word with letters and digits
-    """
-    return ''.join(random.choice(chars) for x in range(size))
 
 
 @click.command()
