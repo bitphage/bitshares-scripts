@@ -37,11 +37,11 @@ def common_options(func):
     return wrapper
 
 
-def chain(f):
+def chain(func):
     @click.pass_context
     def new_func(ctx, *args, **kwargs):
         ctx.bitshares = BitShares(ctx.config['node_bts'], expiration=60)
         set_shared_bitshares_instance(ctx.bitshares)
-        return ctx.invoke(f, *args, **kwargs)
+        return ctx.invoke(func, *args, **kwargs)
 
-    return update_wrapper(new_func, f)
+    return update_wrapper(new_func, func)
