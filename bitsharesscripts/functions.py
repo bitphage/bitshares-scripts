@@ -2,6 +2,7 @@ import secrets
 import string
 from typing import Any, Dict, List, Optional
 
+from bitshares.market import Market
 from bitsharesbase.account import PasswordKey
 
 
@@ -33,3 +34,40 @@ def get_keys_from_password(
         print('{} public: {}\n'.format(key_type, keys[key_type]))
 
     return keys
+
+
+def convert_asset(blockchain_instance: Any, from_value: float, from_asset: str, to_asset: str) -> float:
+    """Converts asset to another based on the latest market value.
+
+    :param blockchain_instance: graphene-compatible blockchain instance
+    :param float from_value: Amount of the input asset
+    :param string from_asset: Symbol of the input asset
+    :param string to_asset: Symbol of the output asset
+    :return: float Asset converted to another asset as float value
+    """
+    market = Market('{}/{}'.format(from_asset, to_asset), bitshares_instance=blockchain_instance)
+    ticker = market.ticker()
+    latest_price = ticker.get('latest', {}).get('price', None)
+    precision = market['base']['precision']
+
+    return round((from_value * latest_price), precision)
+
+
+def transform_asset(
+    blockchain_instance: Any, sum_balances: Dict[str, float], from_asset: str, to_asset: str
+) -> Dict[str, float]:
+    """In sum_balances dict, convert one asset into another.
+
+    :param blockchain_instance: graphene-compatible blockchain instance
+    :param dict sum_balances: dict with balances
+    :param str from_asset: asset to convert from
+    :param str to_asset: destination asset
+    """
+    if from_asset in sum_balances:
+        amount = convert_asset(blockchain_instance, sum_balances[from_asset], from_asset, to_asset)
+        sum_balances[from_asset] = 0
+        if to_asset in sum_balances:
+            sum_balances[to_asset] += amount
+        else:
+            sum_balances[to_asset] = amount
+    return sum_balances
