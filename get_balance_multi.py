@@ -1,51 +1,29 @@
 #!/usr/bin/env python
 
-import argparse
-import json
-import logging
 import sys
-from pprint import pprint
+from typing import Dict
 
-import yaml
-from bitshares import BitShares
+import click
 from bitshares.account import Account
-from bitshares.amount import Amount
 
-log = logging.getLogger(__name__)
+from bitsharesscripts.decorators import chain, common_options
 
 
-def main():
-    parser = argparse.ArgumentParser(
-        description='Show multiple accounts balances sum (avail + orders balance)', epilog='Report bugs to: '
-    )
-    parser.add_argument('-d', '--debug', action='store_true', help='enable debug output'),
-    parser.add_argument('-c', '--config', default='./config.yml', help='specify custom path for config file')
-    args = parser.parse_args()
+@click.command()
+@common_options
+@chain
+@click.pass_context
+def main(ctx):
+    """Show multiple accounts balances sum (avail + orders balance)"""
 
-    # create logger
-    if args.debug == True:
-        log.setLevel(logging.DEBUG)
-    else:
-        log.setLevel(logging.INFO)
-    handler = logging.StreamHandler()
-    formatter = logging.Formatter("%(asctime)s %(levelname)s: %(message)s")
-    handler.setFormatter(formatter)
-    log.addHandler(handler)
-
-    # parse config
-    with open(args.config, 'r') as ymlfile:
-        conf = yaml.safe_load(ymlfile)
-
-    bitshares = BitShares(node=conf['node_bts'], no_broadcast=True)
-
-    sum_balances = dict()
-
-    if not conf['my_accounts']:
-        log.critical('You need to list your accounts in "my_accounts" config variable')
+    if not ctx.config['my_accounts']:
+        ctx.log.critical('You need to list your accounts in "my_accounts" config variable')
         sys.exit(1)
 
-    for account_name in conf['my_accounts']:
-        account = Account(account_name, bitshares_instance=bitshares)
+    sum_balances: Dict[str, float] = {}
+
+    for account_name in ctx.config['my_accounts']:
+        account = Account(account_name, bitshares_instance=ctx.bitshares)
 
         for i in account.balances:
             sum_balances[i['symbol']] = sum_balances.get(i['symbol'], 0) + i['amount']
