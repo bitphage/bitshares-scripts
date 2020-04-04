@@ -20,9 +20,9 @@ from bitsharesscripts.decorators import chain, common_options
 @click.argument('account')
 @click.pass_context
 def main(ctx, buy_only, sell_only, market, account):
-    """ Cancel all orders of specified account
+    """Cancel all orders of specified account.
 
-        Optionally, you can select market like BTC/USD and choose buy/sell orders only
+    Optionally, you can select market like BTC/USD and choose buy/sell orders only
     """
 
     if buy_only and sell_only:
