@@ -31,4 +31,9 @@ poetry shell
 ./script.py
 ```
 
+Reusable parts
+--------------
+
+Reusable parts are being moved slowly into `bitsharesscripts` package namespace. It can be installed via `pip install bitsharesscripts`.
+
 **Note:** some scripts are sending transactions, you need to add private active keys for your accounts via `uptick addkey`
