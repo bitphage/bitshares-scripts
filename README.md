@@ -17,6 +17,8 @@ This is a small scripts collection for doing various stuff in Bitshares
 * `get_witness.py` - Display witness object
 * `update_keys.py` - Change account keys using generated random password and providing all keys to stdout
 
+**Note:** some scripts are sending transactions, you need to add private active keys for your accounts via `uptick addkey`
+
 Installation via poetry
 -----------------------
 
@@ -25,6 +27,7 @@ Installation via poetry
 3. Run `poetry install` to install the dependencies
 4. Copy `common.yml.example` to `common.yml` and change variables according to your needs
 5. Now you're ready to run scripts:
+
 
 ```
 poetry shell
@@ -35,5 +38,3 @@ Reusable parts
 --------------
 
 Reusable parts are being moved slowly into `bitsharesscripts` package namespace. It can be installed via `pip install bitsharesscripts`.
-
-**Note:** some scripts are sending transactions, you need to add private active keys for your accounts via `uptick addkey`
