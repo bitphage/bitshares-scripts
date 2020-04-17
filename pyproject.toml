@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "bitshares-scripts"
+name = "bitsharesscripts"
 version = "1.0.0"
 description = "A set of scripts for BitShares"
 authors = ["Vladimir Kamarzin <vvk@vvk.pp.ru>"]
 license = "MIT"
+repository = "https://github.com/bitfag/bitshares-scripts"
 
 [tool.poetry.dependencies]
 python = "^3.6.1"
