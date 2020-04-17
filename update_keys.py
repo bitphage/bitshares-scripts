@@ -35,7 +35,7 @@ def main(ctx, password, broadcast, account_name):
 
     print('password: {}\n'.format(password))
 
-    key = get_keys_from_password(account_name, password, ctx.bitshares)
+    key = get_keys_from_password(account_name, password, ctx.bitshares.prefix)
 
     # prepare for json format
     account['options']['memo_key'] = key['memo']

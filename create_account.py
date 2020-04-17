@@ -33,7 +33,7 @@ def main(ctx, password, broadcast, parent_account, account_name):
 
     print('password: {}\n'.format(password))
     # prints keys to stdout
-    get_keys_from_password(account_name, password, ctx.bitshares)
+    get_keys_from_password(account_name, password, ctx.bitshares.prefix)
 
     if not broadcast:
         ctx.log.info('Not broadcasting!')

@@ -14,7 +14,7 @@ from bitsharesscripts.functions import get_keys_from_password
 def main(ctx, account_name, password):
     """Generate private keys from password."""
 
-    get_keys_from_password(account_name, password, ctx.bitshares)
+    get_keys_from_password(account_name, password, ctx.bitshares.prefix)
 
 
 if __name__ == '__main__':
