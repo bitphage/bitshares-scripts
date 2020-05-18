@@ -1,5 +1,6 @@
 import secrets
 import string
+from decimal import Decimal
 from typing import Any, Dict, List, Optional
 
 from bitshares.market import Market
@@ -71,3 +72,12 @@ def transform_asset(
         else:
             sum_balances[to_asset] = amount
     return sum_balances
+
+
+def raw_to_decimal(raw_amount: int, precision: int) -> Decimal:
+    """Convert raw amount to Decimal amount.
+
+    :param raw_amount: bitshares amount in int
+    :param precision: asset precision
+    """
+    return Decimal(raw_amount).scaleb(-precision)
