@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from typing import Dict
+from collections import Counter
+from typing import Counter as TCounter
 
 import click
 from bitshares.account import Account
@@ -16,7 +17,7 @@ from bitsharesscripts.functions import transform_asset
 def main(ctx):
     """Summarize all assets on all accounts and show BTC equivalent."""
 
-    sum_balances: Dict[str, float] = {}
+    sum_balances: TCounter[str] = Counter()
 
     for acc in ctx.config['my_accounts']:
         account = Account(acc, bitshares_instance=ctx.bitshares)
@@ -24,19 +25,19 @@ def main(ctx):
         # Avail balances
         for i in account.balances:
             asset = i['symbol']
-            sum_balances[asset] = sum_balances.setdefault(asset, 0) + i['amount']
+            sum_balances[asset] += i['amount']
 
         # Balance in orders
         for order in account.openorders:
             asset = order['for_sale']['symbol']
-            sum_balances[asset] = sum_balances.setdefault(asset, 0) + order['for_sale']['amount']
+            sum_balances[asset] += order['for_sale']['amount']
 
         # Margin positions
         for asset, details in account.callpositions.items():
-            sum_balances[asset] = sum_balances.setdefault(asset, 0) - details['debt']['amount']
+            sum_balances[asset] -= details['debt']['amount']
 
             asset = details['collateral']['asset']['symbol']
-            sum_balances[asset] = sum_balances.setdefault(asset, 0) + details['collateral']['amount']
+            sum_balances[asset] += details['collateral']['amount']
 
     for asset, amount in sum_balances.items():
         ctx.log.debug('Total: {} {}'.format(asset, amount))

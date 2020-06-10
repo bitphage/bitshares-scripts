@@ -1,7 +1,7 @@
 import secrets
 import string
 from decimal import Decimal
-from typing import Any, Dict, List, Optional
+from typing import Any, Counter, Dict, List, Optional
 
 from bitshares.market import Market
 from bitsharesbase.account import PasswordKey
@@ -55,22 +55,19 @@ def convert_asset(blockchain_instance: Any, from_value: float, from_asset: str, 
 
 
 def transform_asset(
-    blockchain_instance: Any, sum_balances: Dict[str, float], from_asset: str, to_asset: str
-) -> Dict[str, float]:
+    blockchain_instance: Any, sum_balances: Counter[str], from_asset: str, to_asset: str
+) -> Counter[str]:
     """In sum_balances dict, convert one asset into another.
 
     :param blockchain_instance: graphene-compatible blockchain instance
-    :param dict sum_balances: dict with balances
+    :param collections.Counter sum_balances: Counter with balances
     :param str from_asset: asset to convert from
     :param str to_asset: destination asset
     """
     if from_asset in sum_balances:
         amount = convert_asset(blockchain_instance, sum_balances[from_asset], from_asset, to_asset)
         sum_balances[from_asset] = 0
-        if to_asset in sum_balances:
-            sum_balances[to_asset] += amount
-        else:
-            sum_balances[to_asset] = amount
+        sum_balances[to_asset] += amount  # type: ignore
     return sum_balances
 
 
