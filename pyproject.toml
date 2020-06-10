@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bitsharesscripts"
-version = "2.0.1"
+version = "3.0.0"
 description = "A set of scripts for BitShares"
 authors = ["Vladimir Kamarzin <vvk@vvk.pp.ru>"]
 license = "MIT"
