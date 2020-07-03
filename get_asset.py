@@ -32,8 +32,8 @@ def main(ctx, raw, asset):
         feed = asset.feed
         print('MCR: {}'.format(feed['maintenance_collateral_ratio']))
         print('MSSR: {}'.format(feed['maximum_short_squeeze_ratio']))
-        print('Settlement: {}'.format(feed['settlement_price']))
-        print('CER: {}'.format(feed['core_exchange_rate']))
+        print('Settlement: {} or {}'.format(feed['settlement_price'], feed['settlement_price'].copy().invert()))
+        print('CER: {} or {}'.format(feed['core_exchange_rate'], feed['core_exchange_rate'].copy().invert()))
 
 
 if __name__ == '__main__':
