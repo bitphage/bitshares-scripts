@@ -20,6 +20,7 @@ def main(ctx):
     sum_balances: TCounter[str] = Counter()
 
     for acc in ctx.config['my_accounts']:
+        ctx.log.debug('Calculating balances on account {}'.format(acc))
         account = Account(acc, bitshares_instance=ctx.bitshares)
 
         # Avail balances
@@ -45,6 +46,10 @@ def main(ctx):
     if ctx.config['btc_asset'] not in sum_balances:
         # Prevent RuntimeError: dictionary changed size during iteration
         sum_balances[ctx.config['btc_asset']] = 0
+
+    for asset in ctx.config.get('ignore_assets', []):
+        ctx.log.debug('Ignoring asset {}'.format(asset))
+        sum_balances.pop(asset)
 
     for from_asset, to_asset in ctx.config['transform_assets'].items():
         ctx.log.debug('Transforming {} to {}'.format(from_asset, to_asset))

@@ -22,3 +22,7 @@ transform_assets:
   OPULENCE: USD
   ESCROW.RUBLE: RUBLE
   USD: RUBLE
+
+# Exclude some assets from calculation
+ignore_assets:
+  - RUDEX.GOLOS
