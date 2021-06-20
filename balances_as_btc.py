@@ -42,6 +42,10 @@ def main(ctx):
     for asset, amount in sum_balances.items():
         ctx.log.debug('Total: {} {}'.format(asset, amount))
 
+    if ctx.config['btc_asset'] not in sum_balances:
+        # Prevent RuntimeError: dictionary changed size during iteration
+        sum_balances[ctx.config['btc_asset']] = 0
+
     for from_asset, to_asset in ctx.config['transform_assets'].items():
         ctx.log.debug('Transforming {} to {}'.format(from_asset, to_asset))
         sum_balances = transform_asset(ctx.bitshares, sum_balances, from_asset, to_asset)
